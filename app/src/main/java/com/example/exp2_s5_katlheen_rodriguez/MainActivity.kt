@@ -8,6 +8,7 @@ import com.example.exp2_s5_katlheen_rodriguez.model.User
 import com.example.exp2_s5_katlheen_rodriguez.ui.LoginScreen
 import com.example.exp2_s5_katlheen_rodriguez.ui.RegisterScreen
 import com.example.exp2_s5_katlheen_rodriguez.ui.RecoverPasswordScreen
+import com.example.exp2_s5_katlheen_rodriguez.ui.WelcomeScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.compose.runtime.remember
@@ -39,5 +40,10 @@ fun MainApp() {
         composable("login") { LoginScreen(navController, users) }
         composable("register") { RegisterScreen(navController, users) }
         composable("recover") { RecoverPasswordScreen(navController, users) }
+        composable("welcome/{username}") { backStackEntry ->
+            val username = backStackEntry.arguments?.getString("username") ?: ""
+            val user = users.find { it.username == username }!!
+            WelcomeScreen(navController, user)
+        }
     }
 }

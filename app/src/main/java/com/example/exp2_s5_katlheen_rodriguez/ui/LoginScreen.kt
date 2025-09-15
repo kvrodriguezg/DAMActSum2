@@ -127,13 +127,14 @@ fun LoginScreen(navController: NavHostController, users: MutableList<User>) {
                     //Validar clave
                     val user = matchedUsers.first()
                     if (user.isPasswordValid(password)) {
-                        Toast.makeText(context, "Bienvenido ${user.initials}", Toast.LENGTH_SHORT).show()
-                        return@Button //Se detiene el onClick
+                        //Si coincide la clave se redireccion a la pagina de bienvenida
+                        navController.navigate("welcome/${user.username}")
+                        return@Button
                     } else {
                         throw Exception("Contraseña incorrecta")
                     }
                 } catch (e: Exception) {
-                    //Captura y muestra el mensaje de error
+                    //Mensaje de error
                     Toast.makeText(context, e.message ?: "Error desconocido", Toast.LENGTH_SHORT).show()
                 }
             },
