@@ -103,7 +103,7 @@ fun RegisterScreen(navController: NavHostController, users: MutableList<User>) {
                 onValueChange = { password = it },
                 label = { Text("Contraseña", style = textStyle) },
                 singleLine = true,
-                visualTransformation = PasswordVisualTransformation(), // Ocultar contraseña
+                visualTransformation = PasswordVisualTransformation(), //Ocultar contraseña
                 textStyle = textStyle,
                 modifier = Modifier.fillMaxWidth(),
                 colors = TextFieldDefaults.outlinedTextFieldColors(

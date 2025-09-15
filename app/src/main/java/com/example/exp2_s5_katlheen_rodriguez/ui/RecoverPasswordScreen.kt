@@ -60,7 +60,7 @@ fun RecoverPasswordScreen(navController: NavHostController, users: MutableList<U
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(24.dp)
-                .semantics { contentDescription = "Pantalla recuperar contraseña" }, // Accesibilidad
+                .semantics { contentDescription = "Pantalla recuperar contraseña" },
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

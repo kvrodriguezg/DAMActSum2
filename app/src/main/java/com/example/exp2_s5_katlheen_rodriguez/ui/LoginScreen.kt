@@ -46,7 +46,7 @@ fun LoginScreen(navController: NavHostController, users: MutableList<User>) {
             .fillMaxSize()
             .background(backgroundColor)
             .padding(24.dp)
-            .semantics { contentDescription = "Pantalla de inicio de sesión" }, // Accesibilidad
+            .semantics { contentDescription = "Pantalla de inicio de sesión" },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -120,22 +120,20 @@ fun LoginScreen(navController: NavHostController, users: MutableList<User>) {
                     //Filter (función de orden superior)
                     val matchedUsers = users.filter { it.username == username }
 
-                    //Lambdas con etiqueta para validar contraseña
-                    matchedUsers.forEach check@{
-                        if (it.isPasswordValid(password)) { // función de extensión
-                            Toast.makeText(context, "Bienvenido ${it.initials}", Toast.LENGTH_SHORT).show()
-                            return@check
-                        }
-                    }
-
-                    //Manejo de errores
                     if (matchedUsers.isEmpty()) {
                         throw Exception("Usuario no encontrado")
+                    }
+
+                    //Validar clave
+                    val user = matchedUsers.first()
+                    if (user.isPasswordValid(password)) {
+                        Toast.makeText(context, "Bienvenido ${user.initials}", Toast.LENGTH_SHORT).show()
+                        return@Button //Se detiene el onClick
                     } else {
                         throw Exception("Contraseña incorrecta")
                     }
                 } catch (e: Exception) {
-                    // Captura y muestra el mensaje de error
+                    //Captura y muestra el mensaje de error
                     Toast.makeText(context, e.message ?: "Error desconocido", Toast.LENGTH_SHORT).show()
                 }
             },
@@ -154,7 +152,7 @@ fun LoginScreen(navController: NavHostController, users: MutableList<User>) {
             Spacer(modifier = Modifier.width(8.dp))
             Text("Ingresar", style = textStyle)
         }
-
+        Spacer(modifier = Modifier.height(24.dp))
         //Fila con botones de navegación a Registro y Recuperar
         Row(
             modifier = Modifier.fillMaxWidth(),
